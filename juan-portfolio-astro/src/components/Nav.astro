@@ -1,0 +1,21 @@
+---
+const { name } = Astro.props;
+const links = [
+  ["Experience", "#experience"],
+  ["iOS", "#ios"],
+  ["Education", "#education"],
+  ["Certs", "#certs"],
+  ["Skills", "#skills"],
+  ["Contact", "#contact"]
+];
+---
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#top">{name}</a>
+    <div class="nav__links">
+      {links.map(([label, href]) => (
+        <a class="nav__link" href={href}>{label}</a>
+      ))}
+    </div>
+  </div>
+</nav>

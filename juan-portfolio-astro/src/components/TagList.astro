@@ -1,0 +1,6 @@
+---
+const { tags = [], dense = false } = Astro.props;
+---
+<div class={`tags ${dense ? "tags--dense" : ""}`}>
+  {tags.map((t) => <span class="tag">{t}</span>)}
+</div>

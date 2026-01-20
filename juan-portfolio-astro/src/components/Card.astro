@@ -1,0 +1,19 @@
+---
+const { title, meta, highlights = [] } = Astro.props;
+---
+<article class="card">
+  <header class="card__head">
+    <h3 class="card__title">{title}</h3>
+    {meta ? <p class="card__meta">{meta}</p> : null}
+  </header>
+
+  {highlights.length ? (
+    <ul class="card__list">
+      {highlights.map((h) => <li>{h}</li>)}
+    </ul>
+  ) : null}
+
+  <div class="card__slot">
+    <slot />
+  </div>
+</article>

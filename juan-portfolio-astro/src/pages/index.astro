@@ -1,0 +1,140 @@
+---
+import cv from "../data/cv.json";
+import Nav from "../components/Nav.astro";
+import Section from "../components/Section.astro";
+import Card from "../components/Card.astro";
+import TagList from "../components/TagList.astro";
+
+const title = `${cv.name} — ${cv.title}`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={cv.summary} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <Nav name={cv.name} />
+
+    <main id="content" class="container">
+      <header class="hero" id="top">
+        <div class="hero__meta">
+          <p class="kicker">{cv.location}</p>
+          <h1 class="hero__title">{cv.name}</h1>
+          <p class="hero__subtitle">{cv.title}</p>
+          <p class="hero__summary">{cv.summary}</p>
+
+          <div class="hero__links">
+            <a class="link" href={`mailto:${cv.email}`}>Email</a>
+            <span class="dot">•</span>
+            <a class="link" href={`tel:${cv.phone.replaceAll(" ", "")}`}>Call</a>
+          </div>
+        </div>
+
+        <div class="hero__side">
+          <div class="stat">
+            <div class="stat__num">24</div>
+            <div class="stat__label">org reports</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">5</div>
+            <div class="stat__label">direct reports</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">4</div>
+            <div class="stat__label">teams</div>
+          </div>
+          <p class="muted small">
+            (These numbers are from your CV; edit them in <code>cv.json</code> if they change.)
+          </p>
+        </div>
+      </header>
+
+      <Section id="experience" title="Experience">
+        <div class="grid">
+          {cv.experience.map((x) => (
+            <Card
+              title={`${x.role} — ${x.company}`}
+              meta={`${x.location} • ${x.start} → ${x.end}`}
+              highlights={x.highlights}
+            >
+              <TagList tags={x.tags} />
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="ios" title="iOS Development">
+        <div class="grid">
+          {cv.ios_experience.map((x) => (
+            <Card
+              title={`${x.role} — ${x.company}`}
+              meta={`${x.location} • ${x.start} → ${x.end}`}
+              highlights={x.highlights}
+            >
+              <TagList tags={x.tags} />
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="education" title="Education">
+        <div class="grid grid--2">
+          {cv.education.map((e) => (
+            <Card
+              title={e.program}
+              meta={`${e.institution} • ${e.location} • ${e.start} → ${e.end}`}
+              highlights={[]}
+            />
+          ))}
+        </div>
+      </Section>
+
+      <Section id="certs" title="Certifications">
+        <div class="grid grid--2">
+          {cv.certifications.map((c) => (
+            <Card title={c.name} meta={c.date} highlights={[]} />
+          ))}
+        </div>
+      </Section>
+
+      <Section id="languages" title="Languages">
+        <div class="card">
+          <ul class="list-inline">
+            {cv.languages.map((l) => (
+              <li><span class="pill">{l.name}</span> <span class="muted">{l.level}</span></li>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      <Section id="skills" title="Skills">
+        <div class="card">
+          <TagList tags={cv.skills} dense={true} />
+        </div>
+      </Section>
+
+      <Section id="contact" title="Contact">
+        <div class="card contact">
+          <p class="muted">Best way to reach me:</p>
+          <p class="contact__main">
+            <a class="button" href={`mailto:${cv.email}`}>Email me</a>
+            <a class="button button--ghost" href={`tel:${cv.phone.replaceAll(" ", "")}`}>Call</a>
+          </p>
+          <p class="small muted">
+            Want to change content? Edit <code>src/data/cv.json</code>. Want to change look/feel? Edit <code>src/styles/global.css</code>.
+          </p>
+        </div>
+      </Section>
+
+      <footer class="footer">
+        <p class="muted small">© {new Date().getFullYear()} {cv.name}</p>
+      </footer>
+    </main>
+  </body>
+</html>
