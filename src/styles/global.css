@@ -271,6 +271,8 @@ body{
   -webkit-tap-highlight-color: transparent;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .nav__hamburger:focus-visible{
@@ -288,7 +290,7 @@ body{
   transition: transform 180ms ease, opacity 180ms ease;
 }
 
-.nav__hamburger span + span{ margin-top: 5px; }
+/* spacing handled by flex gap on the button */
 
 /* animate to X when open */
 .nav__hamburger.is-open span:nth-child(1){
