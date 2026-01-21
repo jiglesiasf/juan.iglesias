@@ -53,6 +53,16 @@ const title = `${cv.name} — ${cv.title}`;
         </div>
       </header>
 
+      <Section id="values" title="Values">
+        <div class="grid grid--2">
+          {cv.values.map((v) => (
+            <Card title={v.title}>
+              <p class="muted">{v.description}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
       <Section id="experience" title="Experience">
         <div class="grid">
           {cv.experience.map((x) => (
