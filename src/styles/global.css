@@ -245,3 +245,133 @@ body{
   .hero{ grid-template-columns: 1fr; }
   .grid--2{ grid-template-columns: 1fr; }
 }
+
+
+/* Optional: tweak these to match your header */
+:root {
+  --nav-height: 64px;
+  --nav-drawer-width: 320px;
+}
+
+/* Hamburger button (you'll add this element in HTML/JS) */
+.nav_hamburger {
+  display: none; /* shown only on mobile */
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.nav_hamburger:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* 3 lines */
+.nav_hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.nav_hamburger span + span {
+  margin-top: 5px;
+}
+
+/* When menu is open, animate hamburger into an "X"
+   Add .is-open to the button too (recommended) */
+.nav_hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav_hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.nav_hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Optional overlay behind the drawer */
+.nav_overlay {
+  display: none; /* shown only on mobile */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+  z-index: 999;
+}
+
+.nav_overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  /* Show hamburger on mobile */
+  .nav_hamburger {
+    display: inline-flex;
+  }
+
+  .nav_overlay {
+    display: block;
+  }
+
+  /* Turn nav_links into a drawer */
+  .nav_links {
+    position: fixed;
+    top: var(--nav-height);
+    right: 0;
+    height: calc(100vh - var(--nav-height));
+    width: min(80vw, var(--nav-drawer-width));
+    padding: 18px 18px 24px;
+
+    /* Keep it minimalist; uses your site colors by default */
+    background: var(--nav-drawer-bg, rgba(15, 15, 15, 0.98));
+    color: inherit;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    /* closed state */
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+
+    transition: transform 220ms ease, opacity 220ms ease;
+    z-index: 1000;
+  }
+
+  /* Open state (toggle this class with JS) */
+  .nav_links.is-open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Make links easier to tap */
+  .nav_links a {
+    padding: 10px 8px;
+    border-radius: 10px;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .nav_links,
+  .nav_overlay,
+  .nav_hamburger span {
+    transition: none !important;
+  }
+}
