@@ -10,6 +10,6 @@ import { defineConfig } from "astro/config";
  *    - URL is https://YOUR_GITHUB_USERNAME.github.io/portfolio
  */
 export default defineConfig({
-  site: "https://jiglesias.github.io",
-  // base: "/REPO_NAME",
+  // site: "https://jiglesias.github.io",
+  base: "/juan.iglesias",
 });
