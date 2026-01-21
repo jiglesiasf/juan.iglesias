@@ -38,18 +38,26 @@ const links = [
 </nav>
 
 <script is:inline>
-  const btn = document.querySelector(".nav__hamburger");
-  const links = document.querySelector(".nav__links");
-  const overlay = document.querySelector("[data-nav-overlay]");
+  document.querySelectorAll(".nav").forEach((navEl) => {
+    const btn = navEl.querySelector(".nav__hamburger");
+    const linksEl = navEl.querySelector(".nav__links");
+    const overlay = navEl.querySelector(".nav__overlay");
 
-  function setOpen(open) {
-    btn.classList.toggle("is-open", open);
-    links.classList.toggle("is-open", open);
-    overlay.classList.toggle("is-open", open);
-    btn.setAttribute("aria-expanded", String(open));
-  }
+    if (!btn || !linksEl || !overlay) return;
 
-  btn.addEventListener("click", () => setOpen(!links.classList.contains("is-open")));
-  overlay.addEventListener("click", () => setOpen(false));
+    function setOpen(open) {
+      btn.classList.toggle("is-open", open);
+      linksEl.classList.toggle("is-open", open);
+      overlay.classList.toggle("is-open", open);
+      btn.setAttribute("aria-expanded", String(open));
+    }
 
-  // Close me
+    btn.addEventListener("click", () => setOpen(!linksEl.classList.contains("is-open")));
+    overlay.addEventListener("click", () => setOpen(false));
+
+    linksEl.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => setOpen(false));
+    });
+  });
+</script>
+
