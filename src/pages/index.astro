@@ -50,9 +50,6 @@ const title = `${cv.name} — ${cv.title}`;
             <div class="stat__num">4</div>
             <div class="stat__label">teams</div>
           </div>
-          <p class="muted small">
-            (These numbers are from your CV; edit them in <code>cv.json</code> if they change.)
-          </p>
         </div>
       </header>
 
@@ -126,9 +123,6 @@ const title = `${cv.name} — ${cv.title}`;
           <p class="contact__main">
             <a class="button" href={`mailto:${cv.email}`}>Email me</a>
             <a class="button button--ghost" href={`tel:${cv.phone.replaceAll(" ", "")}`}>Call</a>
-          </p>
-          <p class="small muted">
-            Want to change content? Edit <code>src/data/cv.json</code>. Want to change look/feel? Edit <code>src/styles/global.css</code>.
           </p>
         </div>
       </Section>
