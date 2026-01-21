@@ -16,4 +16,4 @@ This repo deploys automatically to GitHub Pages on every push to `main`.
 Open `astro.config.mjs` and set:
 - `site: "https://jiglesiasf.github.io"` 
 - If this is a project repo (not `username.github.io`), uncomment and set:
-  - `base: "/REPO_NAME"`
+  - `base: "/juan.iglesias"`
