@@ -64,8 +64,9 @@ const title = `${cv.name} — ${cv.title}`;
       </Section>
 
       <Section id="experience" title="Experience">
+        <h3 class="kicker">Engineering leadership</h3>
         <div class="grid">
-          {cv.experience.map((x) => (
+          {cv.experience.engineering_leadership.map((x) => (
             <Card
               title={`${x.role} — ${x.company}`}
               meta={`${x.location} • ${x.start} → ${x.end}`}
@@ -75,11 +76,10 @@ const title = `${cv.name} — ${cv.title}`;
             </Card>
           ))}
         </div>
-      </Section>
 
-      <Section id="ios" title="iOS Development">
+        <h3 class="kicker" style="margin-top: 1.5rem;">iOS</h3>
         <div class="grid">
-          {cv.ios_experience.map((x) => (
+          {cv.experience.ios.map((x) => (
             <Card
               title={`${x.role} — ${x.company}`}
               meta={`${x.location} • ${x.start} → ${x.end}`}
