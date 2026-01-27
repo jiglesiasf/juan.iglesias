@@ -29,27 +29,22 @@ const title = `${cv.name} — ${cv.title}`;
           <h1 class="hero__title">{cv.name}</h1>
           <p class="hero__subtitle">{cv.title}</p>
           <p class="hero__summary">{cv.summary}</p>
-
-          <div class="hero__links">
-            <a class="link" href={`mailto:${cv.email}`}>Email</a>
-            <span class="dot">•</span>
-            <a class="link" href={`tel:${cv.phone.replaceAll(" ", "")}`}>Call</a>
-          </div>
         </div>
 
         <div class="hero__side">
-          <div class="stat">
-            <div class="stat__num">24</div>
-            <div class="stat__label">org reports</div>
-          </div>
-          <div class="stat">
-            <div class="stat__num">5</div>
-            <div class="stat__label">direct reports</div>
-          </div>
-          <div class="stat">
-            <div class="stat__num">4</div>
-            <div class="stat__label">teams</div>
-          </div>
+          {["LinkedIn", "GitHub", "Email", "Phone"].map((label) => {
+            const item = cv.links?.find((l) => l.label === label);
+            if (!item) return null;
+
+            return (
+              <div class="stat">
+                <div class="stat__label">{label}</div>
+                <a class="link" href={item.url} target={label === "Email" || label === "Phone" ? undefined : "_blank"}>
+                  {label === "Email" ? cv.email : label === "Phone" ? cv.phone : item.url.replace(/^https?:\/\//, "")}
+                </a>
+              </div>
+            );
+          })}
         </div>
       </header>
 
